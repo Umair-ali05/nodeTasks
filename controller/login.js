@@ -21,7 +21,7 @@ async function login(req, res) {
     }  else if(loginUser.isvarified == true){
         const check = await  bcrypt.compare(password, loginUser.password);
         if (check) {
-            const token = jwt.sign({
+            const token = await jwt.sign({
                     id: loginUser._id,
                     email,
                     role : loginUser.role,
@@ -30,8 +30,7 @@ async function login(req, res) {
                 SECRET, {
                     expiresIn: "10m",
                 }
-            );
-            console.log(token);
+            )
             res.header('auth', token).send("token has created");
             res.status(200).send();
         } else {
