@@ -7,10 +7,12 @@ async function update(req, res) {
         password,
         email
     } = req.body;
-    const id = await req.params['id'];
+    const id = req.query.id;
+    console.log(id);
     const finduser = await usermodel.findOne({
         id
     })
+    console.log(finduser);
     if (!finduser) {
         res.status(404).send({
             message: "user not fond",
@@ -18,6 +20,7 @@ async function update(req, res) {
         })
     } else if (!password && !email) {
         finduser.name = name,
+        console.log(finduser.name = name);
             finduser.role = role,
             await finduser.save();
         res.status(200).send({

@@ -18,20 +18,22 @@ async function login(req, res) {
             success: false,
             message: "incorrect email"
         })
-    }  else if(loginUser.isvarified == true){
-        const check = await  bcrypt.compare(password, loginUser.password);
+    }  else if(loginUser.isvarified === true){
+        const check = bcrypt.compare(password, loginUser.password);
+        console.log(check);
         if (check) {
-            const token = await jwt.sign({
+            const token = jwt.sign({
                     id: loginUser._id,
                     email,
                     role : loginUser.role,
                     password: loginUser.password
                 },
                 SECRET, {
-                    expiresIn: "10m",
+                    expiresIn: "30m",
                 }
             )
-            res.header('auth', token).send("token has created");
+            console.log(token);
+            res.header('auth', token).send("logedin");
             res.status(200).send();
         } else {
             res.status(403).send({

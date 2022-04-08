@@ -1,10 +1,12 @@
 const usermodel = require("../schema/user.js");
 
 async function del(req, res) {
-    const id = await  req.params['id'];
+    const id = await  req.query.id;
+    console.log(id);
     const finduser = await usermodel.findOne({
         id
     })
+    console.log(finduser);
     if (!finduser) {
         res.status(404).send({
             message :"user not fond",
