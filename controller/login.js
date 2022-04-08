@@ -19,8 +19,7 @@ async function login(req, res) {
             message: "incorrect email"
         })
     }  else if(loginUser.isvarified == true){
-        const check = bcrypt.compare(password, loginUser.password);
-        console.log(check);
+        const check = await  bcrypt.compare(password, loginUser.password);
         if (check) {
             const token = jwt.sign({
                     id: loginUser._id,

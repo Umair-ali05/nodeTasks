@@ -7,7 +7,7 @@ const getallshops = require('../view/getallshops');
 const router = express.Router();
 
 router.post("/adminpage", auth, admin);
-router.post("/adminpage/updateUser" , update),
-router.post("/adminpage/deleteUser" , del)
-router.post("/adminpage/getallshops" , getallshops)
+router.post("/adminpage/updateUser",auth , update),
+router.post("/adminpage/deleteUser",auth , del)
+router.post("/adminpage/getallshops",auth , getallshops)
 module.exports = router;
